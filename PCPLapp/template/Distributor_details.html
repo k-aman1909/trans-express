@@ -1,0 +1,218 @@
+{% extends aman.page_name %}
+{% block extralinks %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{% static 'css/p.css' %}">
+<link rel="stylesheet" href="p.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/complete-validation.js' %}"></script>
+{% endblock extralinks %}
+{% block content %}
+<section class="main-content">
+
+    <section class="table-content">
+       
+                <div class="for-btn"><h2>Distributor Details Form</h2>
+                    <a href="{% url 'Distributor' %}"> <button class="add-new"><i
+                        class="fa-solid fa-xmark"></i>&nbsp;Close</button></a><br></div>
+        
+        <div class="table-content-div">
+            <form  method="post">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>
+                            <label style="display:block;">Distributor Id<font style="color:red;">*</font></label>
+                            <input type="text" name="dis_id" id="" required value="{{dist_id}}" placeholder="Distributor Id" >
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>Distributor Name<font style="color:red;">*</font></label>
+                            <input type="text" name="dist_name" id="name" style="text-transform: capitalize;" onfocus="alphabets('#name')" 
+                                placeholder="Distributor Name" required >
+                            <span></span>
+                        </td>
+                        <td>
+                            <label style="display:block">Depot Name<font style="color:red;">*</font></label>
+                            <input type="text" name="depot_name"  required id="depotname" style="text-transform: capitalize;"
+                                placeholder="Depot Name" onfocus="alphabets('#depotname')" readonly >
+                            <span></span>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <label>Contact No.</label>
+                            <input type="text"  name="cont_no"  id="contact"
+                                placeholder="Contact No." onfocus="number('#contact')" minlength="10" maxlength="10">
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>Landline No.</label>
+                            <input type="number"   name="landline_no" id="landline" 
+                                placeholder="Landline No.(Optional)"  minlength="10" maxlength="10" onfocus="optional('#landline')" >
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>Email ID</label>
+                            <input type="email" required  name="emailID" id="emailID" 
+                                placeholder="Enter your Email ID" >
+                            <span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Labour Expense<font style="color:red;">*</font></label>
+                            <input type="text" required name="lab_expense" id="labourexp" placeholder="Labour Expense"
+                            onfocus="price('#labourexp')" >
+                            <span></span>
+                        </td>
+
+                        <td>
+                            <label> State<font style="color:red;">*</font></label>
+
+                            <select name="state" id="myst" required>
+                                <option value="" selected disabled>----- Select Any State -----</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Chattisgarh">Chattisgarh</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="jammu & Kashmir">Jammu & Kashmir</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Lakshadweep">Lakshadweep</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                    <option value="Andaman & Nicobar">Andaman & Nicobar</option>
+                                    <option value="Dadra & Nagar Haveli and Daman & Diu">Dadra & Nagar Haveli and Daman
+                                        & Diu</option>
+                                    <option value="Pondicherry">Pondicherry</option>
+                                    <option value="Nagaland"> Nagaland</option>
+
+                            </select>
+                            <span></span>
+                        </td>
+                        <td>
+                            
+                            <label>City<font style="color:red;">*</font></label>
+                            <input type="text" name="city" required id="mydist" style="text-transform: capitalize;"
+                                placeholder="City" style="text-transform: capitalize;" onfocus="alphabets('#mydist')">
+                            <span></span>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="top:.7rem; left:2.5rem">Address<font style="color:red;">*</font></label>
+        
+                                <input type="text" required name="address" style="text-transform: capitalize;" id="adrs" 
+                                placeholder="flat/street/landmark" >
+                            <span></span>
+                        </td>
+                        
+                        <td>
+                            <label>Pincode<font style="color:red;">*</font></label>
+                            <input type="text" required minlength="6" name="pin_code" id="pin"  placeholder="Pincode"
+                            onfocus="pincode('#pin')" >
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>GST No.<font style="color:red;">*</font></label>
+                            <input type="text" name="gst_no" id="gst" required minlength="15" style="text-transform: uppercase;"
+                                placeholder="GST No." onfocus="Gstno('#gst')">
+                            <span></span>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center">
+                            <input type="submit" class="entry-button" value="&#10003; Submit">
+                            <input type="reset" class="entry-button"
+                                style="background-color:#EA5453;margin-left:3rem;" value="↻ Refresh"  onclick="window.location.reload()">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </section>
+    
+</section>
+{% if messages %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+{% for msg in messages %}
+{% if msg.tags == 'success' %}
+<script>
+    Swal.fire({
+        icon: '{{msg.tags}}',
+        title: '{{msg}}',
+        showConfirmButton: true,
+        confirmButtonClass: 'btn btn-success'
+    });
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<script>
+    $(document).ready(function () {
+        let value = sessionStorage.getItem('depot_Name')
+        $('#depotname').val(value);
+    });
+    $('select[name="state"]').change(function () {
+        $.ajax({
+            method: 'GET',
+            url: "/fghevbn/ajaxcall/",
+            dataType: "json",
+            data: {
+                'cond':'state',
+                'uname': $(this).val(),
+            },
+            success: function (response) {
+                if (response == 'None') {
+                    sweetAlert("Warning!", 'There is no record of mode available for ' + uname + '', "warning");
+                }
+                else {
+                    $('select[name="district"]').html(response);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+    $(function () {
+        $('#myst').change(function(){ 
+            
+            if($(this).val() !== ""){
+                $('#mydist').prop('disabled', false); 
+            } else {
+                $('#mydist').prop('disabled', true);
+            }
+        });
+    });
+</script>
+{% endblock content %}

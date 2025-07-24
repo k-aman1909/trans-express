@@ -1,0 +1,239 @@
+{% extends aman.page_name %}
+{% block extralinks %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{% static 'css/p.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/validation.js' %}"></script>
+{% endblock extralinks %}
+{% block content %}
+<section class="main-content">
+    
+    <section class="table-content">
+        <h2>Order Details Form</h2>
+        <a href="{% url 'Order_Service' %}"><button class="add-new" ><i class="fa fa-plus"></i>&nbsp;Service</button></a><br>
+        
+        <h3>
+            
+            <div class="table-content-div search-section">
+                <form>
+                    <table>
+                        <tr>
+                            <td>
+                                <label>LR Number<font style="color:red;">*</font></label>
+                                <input type="text" class="mini" name="lr1" required placeholder="Lr No.">
+                                <input type="text" class="major" name="lr2" id="" placeholder="Lr Id">
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>LR Date<font style="color:red;">*</font></label>
+                                <input type="date" name="lrdate" id="" >
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Distributor Name<font style="color:red;">*</font></label>
+                                <input type="text" name="dis_name" id="name" style="text-transform: capitalize;" placeholder="Depot Name" onclick="alphapets('#name')">
+                                <span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <!-- <label>Distributor Town<font style="color:red;">*</font></label> -->
+                                <select name="dsi_town" id="">
+                                    <option value="" selected disabled>----- Distributor Name -----</option>
+                                    <option value="Patna">Patna</option>
+                                </select>
+                            </td>
+                            <td>
+                                <!-- <label>Transporter Name<font style="color:red;">*</font></label> -->
+                                <select name="tran_name" id="">
+                                    <option value="" selected disabled>----- Transporter Name -----</option>
+                                    <option value="Rozy Travels">----- Rozy Travels -----</option>
+                                </select>
+                            </td>
+                            <td>
+                                <!-- <label>Vehicle Type<font style="color:red;">*</font></label> -->
+                                <select name="vehicle_type" id="">
+                                    <option value="" selected disabled>----- Select Vehicle Type -----</option>
+                                    <option value="Four Wheeler">----- Four Wheeler -----</option>
+                                </select>
+                            </td>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Vehicle No. <font style="color:red;">*</font></label>
+                                <input type="text" name="vehicle_no" id="" placeholder="Vehicle No.">
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Load Type<font style="color:red;">*</font></label>
+                                <input type="radio" name="load"> FTL  &nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="load"> PTL  &nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="load"> Weight &nbsp;&nbsp;&nbsp;
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Invoice No.<font style="color:red;">*</font></label>
+                                <input type="text" name="" id="" placeholder="Invoice No">
+                                <span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <label>Invoice Value<font style="color:red;">*</font></label>
+                                <input type="text" name="" id="" placeholder="Invoice Value">
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Quantity<font style="color:red;">*</font></label>
+                                <input class="major" type="text" name="" id="quantity" placeholder="Quantity" onclick="number('#quantity')">
+                                <select class="mini" name="" id="">
+                                    <option  value="" selected >Qty</option>
+                                </select>
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Invoice Date<font style="color:red;">*</font></label>
+                                <input type="Date" name="" id="">
+                                <span></span>
+                            </td>
+                           
+                        <tr>
+                            
+                           
+                        <tr>
+                            <td>
+                                <label>Weight<font style="color:red;">*</font></label>
+                                <input class="major" type="text" name="" id="weight" placeholder="Weight" onclick="number('#weight')">
+                                <select class="mini"  name="" id="">
+                                    <option  value="" selected >Kgs</option>
+                                </select>
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Labour Expense<font style="color:red;">*</font></label>
+                                <input type="text" name="" id="labourexpense" placeholder="Labour Expense" onclick="number('#labourexpense')">
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Freight<font style="color:red;">*</font></label>
+                                <input type="text" name="" id="freight" placeholder="Freight" onclick="number('#freight')">
+                                <span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <label>Miscallaneous Charge<font style="color:red;">*</font></label>
+                                <input type="text" name="" id="Miscallaneous" placeholder="Miscallaneous Charge" onclick="number('#Miscallaneous')">
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Total Amount<font style="color:red;">*</font></label>
+                                <input type="text" name="" id="totalamount" placeholder="Total Amount" onclick="number('#totalamount')">
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Advance Amount<font style="color:red;">*</font></label>
+                                <input type="text"  class='mini'>
+                                <input type="text"  name="" id="advance" class='major'onclick="number('#advance')" >
+                                <span></span>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Dues Amount<font style="color:red;">*</font></label>
+                                <input type="text" name="" id="duesamount" placeholder="Dues Amount" onclick="number('#duesamount')" >
+                                <span></span>
+                            </td>
+                            <td>
+                                <!-- <label>LR Preserve No.<font style="color:red;">*</font></label> -->
+                                
+                                <select name="" id="">
+                                    <option value="" selected disabled>----- Transporter Name -----</option>
+                                </select>
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Product<font style="color:red;">*</font></label>
+                                <input type="text" name="" id="product" placeholder="Product" onclick="alphapets('#product')">
+                                <span></span>
+                            </td>
+                           
+                        </tr>
+                        <tr>
+                            
+                            
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <input type="submit" class="entry-button" value="&#10003; Submit">
+                                <input type="reset" class="entry-button" style="background-color:#EA5453;margin-left:3rem;" value="↻ Refresh">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                {% comment %} <form >
+                    <table>
+                        <tr>
+                            <td>
+                                <!-- <label>LR Number</font></label> -->
+                                <select name="" id="">
+                                    <option value="" selected disabled>---- Select LR Number ----</option>
+                                </select>
+                                
+                            </td>
+                            <td>
+                                <!-- <label>Distributor Name </label> -->
+                                <select name="" id="">
+                                    <option value="" selected disabled>---- Select Distributor Name ----</option>
+                                </select>
+                                
+                            </td>
+                            <td>
+                                <!-- <label>Transporter Name</label> -->
+                                <select name="" id="">
+                                    <option value="" selected disabled>---- Select Transporter Name ----</option>
+                                </select>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <!-- <label>Distributor Town</label> -->
+                                <select name="" id="">
+                                    <option value="" selected disabled>---- Select Distributor Town ----</option>
+                                </select>
+                                
+                            </td>
+                            <td colspan="2" align="center">
+                                <input type="submit" class="entry-button" value="&#10003; Submit">
+                                <input type="reset" class="entry-button" style="background-color:#EA5453;margin-left:3rem;" value="Refresh">
+                            </td>
+                        <tr>
+                            
+                        </tr>
+                    </table>
+                </form> {% endcomment %}
+            </div>
+        </h3>
+    </section>
+    <div class="entry-section">
+        <section class="table-content" >
+            <button class="add-new"> <i class="fa-solid fa-xmark"></i>&nbsp;Close</button>
+            <div class="table-content-div">
+                
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock content %}

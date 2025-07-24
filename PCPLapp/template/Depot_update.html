@@ -1,0 +1,219 @@
+{% extends aman.page_name %}
+{% block extralinks %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{% static 'css/p.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/complete-validation.js' %}"></script>
+{% endblock extralinks %}
+{% block content %}
+<section class="main-content">
+    <section class="table-content">
+        <div class="for-btn">
+            <h2>Depot Updation Form</h2>
+            <a href="{% url 'Depot_Service' %}"> <button class="add-new"><i
+                        class="fa-solid fa-xmark"></i>&nbsp;Close</button></a><br>
+        </div>
+        <div class="table-content-div">
+            <form method="post">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>
+                            <label style="display:block;">Depot Id<font style="color:red;">*</font></label>
+                            <input type="text" name="did" required value={{u.diop_id}} id="usrid" placeholder="Distributor Id">
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>Principal Comapany Name<font style="color:red;">*</font></label>
+                            <input type="text" id="name" name="pre-com-name" value={{u.pri_name}}
+                                style="text-transform: capitalize;" placeholder="Principal Comapany Name"
+                                onfocus="alphabets('#name')" >
+                            <span></span>
+                            
+                        </td>
+                        <td>
+                            <label style="display:block;"> Operational Comapany Name<font style="color:red;">*</font></label>
+                            
+                            
+                            <select name="ope-com-name" id="opecomname">
+                                <option value="TransExpress">TransExpress</option>
+                            </select>
+                            <span></span>
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Depot Manager Name<font style="color:red;">*</font></label>
+                            <input type="text" id="d-man-name" name="dmanager-name" value={{u.man_name}}
+                                style="text-transform: capitalize;" placeholder="Depot Manager Name"
+                                onfocus="alphabets('#d-man-name')" >
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>Depot Manager Mobile No.<font style="color:red;">*</font></label>
+                            <input type="text" name="dmanager-no" value={{u.man_cont}} id="mob" maxlength="10"
+                                onfocus="number('#mob')" placeholder="Depot Manager Mobile No."
+                                >
+                            <span></span>
+                        </td>
+                        <td>
+                            <label class="optional" style="display:block;">Depot Mobile No.</label>
+                            
+                                <input type="text" name="depot-no" minlength="10" maxlength="10"  id="depotmob"
+                                placeholder="Depot Mobile Number(Optional)" value="{{u.depo_cont}}" onfocus="optional('#depotmob')"
+                               >
+                               <span></span>
+                        </td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label style="display:block;">Depot Telephone No.</label>
+                            <input type="text" name="depot-tno" id="tele-phone"
+                                placeholder="Depot Telephone No.(Optional)" value="{{u.depo_tel}}"  onfocus="number('#tele-phone')" minlength="10" maxlength="10" onfocus="optional('#tele-phone')">
+                                <span></span>
+                        </td>
+
+                        <td>
+                            <label style="display:block;"> State<font style="color:red;">*</font></label>
+
+                            <select name="state" id="myst">
+                                <option value="" selected disabled>----- Select Any State -----</option>
+                                <!-- <option value="{{u.state}}" selected="true">{{u.state}}</option> -->
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Chattisgarh">Chattisgarh</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="jammu & Kashmir">Jammu & Kashmir</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman & Nicobar">Andaman & Nicobar</option>
+                                <option value="Dadra & Nagar Haveli and Daman & Diu">Dadra & Nagar Haveli and Daman
+                                    & Diu</option>
+                                <option value="Pondicherry">Pondicherry</option>
+                                <option value="Nagaland"> Nagaland</option>
+
+                            </select>
+                            <span></span>
+                        </td>
+                        <td>    
+                            <label style="display:block;"> District<font style="color:red;">*</font></label>
+                            
+                            {{data.distr}}
+                            <select name="district" id="mydist">
+                                {% for data in data %}
+                                
+                                    <option value="{{data}}" selected>{{data}}</option>
+                                {% endfor %}
+                            </select>
+                            <span></span>
+                        </td>
+
+
+
+                    </tr>
+                    <tr>
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label style="top:.7rem; left:2.5rem">Address<font style="color:red;">*</font></label>
+
+                            <input type="text"  id="adrs" placeholder="flat/street/landmark"
+                                 name="address" value={{u.addr}}
+                                >
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>GST No.<font style="color:red;">*</font></label>
+                            <input type="text" name="gst-no" value={{u.gst}} id="gst" placeholder="GST No."
+                                onfocus="Gstno('#gst')" 
+                                style="text-transform: uppercase;">
+                            <span></span>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center">
+                            <input type="submit" class="entry-button" value="&#10003; Update">
+                            <input type="reset" class="entry-button" style="background-color:#EA5453;margin-left:3rem;"
+                                onclick="window.location.reload()"
+                                value="↻ Refresh">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </section>
+
+</section>
+<script>
+    v = '{{u.state}}'.replace('&amp;', '&')
+    $("#myst option[value='" + v + "']").prop('selected', true);
+    $("#opecomname option[value='" + '{{u.ope_name}}' + "']").prop('selected', true);
+    dis = '{{u.distr}}'.replace('&amp;', '&')
+
+    $("#mydist option[value='" + dis + "']").prop('selected', true);
+</script>
+<script>
+    $('select[name="state"]').change(function () {
+        var uname = $(this).val();
+        fgvksel('select[name="district"]', uname, 'state');
+    });
+    function fgvksel(iid, data, cond) {
+        $.ajax({
+            method: 'GET',
+            url: "/fghevbn/ajaxcall/",
+            dataType: "json",
+            data: {
+                'cond': cond,
+                'uname': data,
+            },
+            success: function (response) {
+                if (response == 'None') {
+                    sweetAlert("Warning!", 'There is no record of mode available for ' + uname + '', "warning");
+                }
+                else {
+                    $(iid).html(response);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+</script>
+{% endblock content %}

@@ -1,0 +1,91 @@
+{% extends aman.page_name %}
+{% block extralinks %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{% static 'css/p.css' %}">
+<link rel="stylesheet" href="{% static 'css/img.css' %}">
+<link rel="stylesheet" href="p.css">
+<link rel="stylesheet" href="{% static 'css/profilemain.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/complete-validation.js' %}"></script>
+{% endblock extralinks %}
+{% block content %}
+    <section class="table-content">
+        <div class="for-btn"><h2>Update Driver Details</h2>
+            <a href="{% url 'driver_details' %}"> <button class="add-new"><i
+                class="fa-solid fa-xmark"></i>&nbsp;Close</button></a><br></div>
+        <div class="table-content-div">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                   <tr>
+                    <td rowspan="3" class="e_img">
+                        <div class="for-img " title="Upload image">
+
+                            <label class="l_upload" for="pic" title="Upload image" style="z-index: 1;"><img
+                                 class="auto-img" alt="uploding Image" >Upload
+                                Driver Photo</label>
+                            <input type="file" id="pic" src=""  name="profile_pic" style="height:100%;z-index: 9999;opacity: 0;" onchange="previewImage(event)">
+                            <div class="img-box" style="top:0;">
+                                <img {% if u.drv_pic %} src="{{ u.drv_pic.url }}"  {% endif %} style="width: 100%; " alt="uploding Image">
+                            </div>
+                        </div>
+                    </td>
+                   
+                        <td>
+                            <label style="display:block;">Driver Id<font style="color:red;">*</font></label>
+                            <input type="text" name="drv_id" value="{{u.drv_id}}" id="" placeholder="Driver Id" readonly>
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>Driver Name<font style="color:red;">*</font></label>
+                            <input type="text" name="drv-name" id="name" value="{{u.drv_nme}}" placeholder="Driver Name" onfocus="alphabets('#name')" >
+                            <span></span>
+                        </td>
+                        
+                        
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Contact No.<font style="color:red;">*</font></label>
+                            <input type="text" name="drv-contact" value="{{u.drv_no}}" maxlength="10" id="contact" placeholder="Contact No." onfocus="number('#contact')" >
+                            <span></span>
+                        </td> 
+                        
+                        <td>
+                            <label>Driving License No.<font style="color:red;">*</font></label>
+                            <input type="text" name="drv-lisen-no" value="{{u.drv_lis_no}}"  id="contact"onfocus="number('#contact')" placeholder="Driving License No.">
+                            <span></span>
+                        </td>
+                        
+                    </tr>
+                   
+                    <tr>
+                        <td>
+                            <label>Salary</label>
+                            <input type="text" name="drv_sal" value="{{u.drv_sal}}" maxlength="10" id="contact"onfocus="number('#contact')" placeholder="Salary">
+                            <span></span>
+                        </td>
+                        <td>
+                            <label for="addhar">Aadhar</label>
+                            <input type="text" name="drv_addhar" value="{{u.drv_addhar}}" id="aadhar" maxlength="12" onfocus="number('#contact')">
+                            <span></span>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center">
+                            <input type="submit" class="entry-button" value="Update">
+                            <input type="reset" class="entry-button" style="background-color:#EA5453;margin-left:3rem;" value="↻ Refresh">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </section>
+</section>
+
+{% endblock content %}

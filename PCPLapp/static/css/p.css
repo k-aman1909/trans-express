@@ -1,0 +1,372 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    text-transform: capitalize;
+}
+
+.main-content{
+    /* border: 2px solid red; */
+    position: relative;
+    min-height: 77vh;
+    /* padding-top: 1rem; */
+}
+.table-content{
+    /* border: 2px solid rgb(255, 21, 0); */
+    position: relative;
+    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+    border-radius: .5rem;
+    overflow: hidden;
+    background-color: white;
+    padding: .7rem;
+    width: 100%;
+}
+.table-content h3 button{
+    width: 100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding: .5rem 1rem;
+    border-radius: .2rem;
+    margin-top: 1.2rem;
+    border: none;
+    font-weight: bold;
+    color: white;
+    background-color: #0c0a85;
+    cursor: pointer;
+}
+.table-content .for-btn{
+    /* border: 2px solid red; */
+    width: 100%;
+    padding-top: .5rem;
+    /* padding-bottom: .5rem; */
+    padding-left: 1rem;
+    position: relative;
+    background-color: #0c0170;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.table-content .for-btn h2{
+    width: 60%;
+    /* border: 2px solid red; */
+    /* position: absolute; */
+    /* left: 1rem; */
+    color: white;
+    /* border: 2px solid blue; */
+    text-align: left;
+}
+.table-content  .add-new{
+    border: none;
+    outline: none;
+    background-color: gainsboro;
+    color: gray;
+    font-size: 1.2rem;
+    /* width: 100%; */
+    /* height:90% ; */
+    position: absolute;
+    right: 1rem;
+    padding: .3rem .9rem;
+    /* height: 10%; */
+    border-radius: 2rem;
+    font-weight: bold;
+    float: right;
+    cursor: pointer;
+    
+    &:hover{
+        background-color: rgb(4, 177, 4);
+        color: white;
+    }
+}
+.entry-section{
+    display: none;
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    min-height: 57vh;
+    overflow: auto;
+    bottom: 2rem;  
+    /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; */
+    /* border: 2px solid red; */
+}
+.entry-section .add-new:hover{
+    color: white;
+    background-color: red;
+}
+/* .entry-section .table-content{
+    width: 50%;
+    margin: auto;
+} */
+.main-content h2{
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: .1rem;
+    font-size: 2rem;
+    color:#23B7E5;
+    /* margin: 1rem 0; */
+    /* border: 1px solid red; */
+}
+.table-content-div{
+    padding: .5rem;
+}
+.table-content-div table{
+    width: 100%;
+}
+.search-table,
+.dwnld-div{
+    width: 100%;
+    overflow:auto;
+    position: relative;
+    background-color: white;
+    top: 3rem;
+}
+.search-table table{
+    width: 120rem;
+    border-collapse: collapse;
+}
+.search-table table th{
+    color: white;
+    background-color: #23B7E5;
+    /* text-align: center; */
+    
+    
+}
+.search-table table td,
+.search-table table th{
+    border: solid 1px gainsboro;
+    padding: .5rem;
+    text-align: center;
+    
+}
+.table-content-div table td{
+    width: 33.3% !important ;
+    /* display: flex; */
+    height: 6rem;
+    
+    width: 15rem !important;
+    position: relative;
+    padding:.5rem 1rem;
+    text-align: center;
+    /* border: solid 1px rgb(150, 215, 20); */
+    
+}
+
+.td-div,.table-content-div table td input[type='range'],.table-content-div table td input[type='number'],.table-content-div table td input[type='url'],.table-content-div table td input[type='text'],.table-content-div table td input[type='email'],.table-content-div table td input[type='date'],.table-content-div table td input[type='file'],.table-content-div table td textarea,.table-content-div table td select,.table-content-div table td input[type='month']{
+    width: 100%;
+    border-radius: .5rem;
+    height: 2.8rem;
+    /* box-shadow: none; */
+    border: none;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.7);
+    /* border: solid 1px gainsboro; */
+    /* padding: .55rem; */
+    padding-left: 1.5rem;
+
+    font-size: 1rem;
+    /* text-align: center; */
+    position: relative;
+    
+}
+/* Chrome, Safari, Edge, Opera */
+.table-content-div table td input[type='number']::-webkit-outer-spin-button,
+.table-content-div table td input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.table-content-div table td select{
+    text-align: center;
+    width: 100%;
+    
+    /* border: 2px solid red; */
+}
+
+.mini{
+    width:28% !important;
+    position: absolute; 
+    padding: 0 !important;
+    right: -1rem !important;
+    font-size: .8rem !important;
+}
+.major{
+    width:60% !important;
+    position: absolute;
+    left:-1rem !important ;
+}
+
+.table-content-div table td label{
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: .9rem;
+    color: #0c0170;
+    display: none;
+    /* border: 2px solid red ; */
+    position: absolute;
+    left: 10%;
+    top: .9rem;
+    
+    background-color: white;
+    z-index: 1;
+    
+}
+.table-content-div table td span{
+    /* border: 2px solid red; */
+    position: absolute;
+    color: red;
+    bottom: 0;
+    font-size: 1rem;
+    right: 1.5rem;
+}
+.entry-button,.search-table table td button{
+    padding: .5rem 1rem;
+    font-size: 1.2rem;
+    font-size: bold;
+    border: none;
+    outline: none;
+    background-color: #07cd18;
+    color: white;
+    cursor: pointer;
+    border-radius: .5rem;
+    /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+   
+}
+button a {
+    text-decoration: none;
+}
+button a i{
+    color:  white;
+}
+
+.search-table table td button{
+    padding: .2rem .5rem;
+}
+.td-div span{
+    color: white !important;
+    background-color: rgb(58, 161, 58);
+    padding: .5rem;
+    border-radius: 1rem;
+    position: relative;
+    margin-left: .2rem;
+}
+.td-div span i{
+    /* position: absolute; */
+    color: rgb(151, 6, 6);
+    cursor: pointer;
+}
+
+.div{
+    /* border: 2px solid red; */
+    margin-top: 1rem;
+    width: 100%;
+    background-color: rgb(90, 198, 228);
+}
+.div p{
+    padding: .5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+
+}
+
+@media screen and (max-width:1362px){
+    .mini{
+        width:28% !important;
+        position: absolute; 
+        padding: 0 !important;
+        right: -.6rem !important;
+        font-size: .8rem !important;
+    }
+    .major{
+        width:60% !important;
+        position: absolute;
+        left:-.52rem !important ;
+    }
+    .entry-button,.search-table table td button{
+        padding: .3rem .5rem;
+        font-size: 1rem;
+        font-size: bold;
+        border: none;
+        outline: none;
+        background-color: #07cd18;
+        color: white;
+        cursor: pointer;
+        border-radius: .5rem;
+    }
+}
+
+@media screen and (max-width:888px) {
+    .entry-button,.search-table table td button{
+        padding: .6rem .5rem;
+        font-size: .7rem;
+        font-size: bold;
+        border: none;
+        outline: none;
+        background-color: #07cd18;
+        color: white;
+        cursor: pointer;
+        border-radius: .5rem;
+    }
+}
+@media screen and (max-width:768px) {
+    html{
+        font-size: 85%;
+    }
+   
+    .table-content-div table td{
+        /* border: 2px solid red; */
+        display: block;
+        width: 100% !important;
+    }
+    .entry-section .table-content{
+        width: 100% !important;
+        margin: auto;
+    }
+    .table-content-div table td label{
+        /* border: 2px solid red; */
+        top: 0rem;
+    }
+    .table-content .for-btn{
+        /* border: 2px solid red; */
+        padding-bottom: .5rem;
+    }
+    .mini{
+        width:28% !important;
+        position: absolute; 
+        padding: 0 !important;
+        right:0rem !important;
+        font-size: .8rem !important;
+    }
+    .major{
+        width:70% !important;
+        position: absolute;
+        left:0rem !important ;
+    }
+    #dateandtime{
+        display: none;
+    }
+    .entry-button,.search-table table td button{
+        padding: .5rem 1rem;
+        font-size: 1.2rem;
+        font-size: bold;
+        border: none;
+        outline: none;
+        background-color: #07cd18;
+        color: white;
+        cursor: pointer;
+        border-radius: .5rem;
+        /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+       
+    }
+    .table-content .for-btn h2{
+        font-size: 1.5rem;
+    }
+    
+
+    
+}

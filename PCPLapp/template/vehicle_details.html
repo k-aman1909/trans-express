@@ -1,0 +1,109 @@
+{% extends aman.page_name %} {% block extralinks %} {% load static %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<link rel="stylesheet" href="{% static 'css/p.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/complete-validation.js' %}"></script>
+{% endblock extralinks %} 
+{% block content %}
+
+  <section class="table-content">
+        <div class="for-btn"><h2>Vehicle Details Form</h2>
+            <a href="{% url 'vehicle_service' %}"> <button class="add-new"><i
+                class="fa-solid fa-xmark"></i>&nbsp;Close</button></a><br></div>  
+          
+        <div class="table-content-div">
+          <form method="post">
+            {% csrf_token %}
+            <table>
+              <tr>
+                <td align="left" >
+                  <label>Load Type <font style="color: red">*</font></label>
+                  <div style="display:flex;justify-content:space-evenly;">
+                    <div style="cursor: pointer;" class="radio"><input type="radio" name="load-type" value="FTL"  id="" checked /> FTL</div>
+                    <div style="cursor: pointer;" class="radio"><input type="radio" name="load-type" value="PTL" id="" /> PTL</div>
+                    <div style="cursor: pointer;" class="radio"><input type="radio" name="load-type" value="Weight" id="" /> Weight</div></div>
+                </td>
+                <td>
+                  <label for="">Freight <font style="color: red">*</font></label>
+                  <input type="text" id="f-ght" placeholder="Freight" name="freight" required onfocus="price('#f-ght')"  />
+                  <span></span>
+                </td>
+                <td>
+                  <label for="" > City</label>
+                  <select name="cityName" id="" style="text-align: center" required>
+                    <option value="city" selected disabled>------- Select City Name -------</option>
+                    {% if city_name %}
+                      {% for city in city_name %}
+                        <option value="{{city.city}}">{{city.city}}</option>
+                      {% endfor %}
+                    {% endif %}
+                  </select>
+                  <span></span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for=""
+                    >Vehicle Type <font style="color: red">*</font></label>
+                      
+                  <input type="text" id="vtype" name="vehicleType" placeholder="Vehicle Type" required onfocus="vehicletype('#vtype')" />
+                       <span></span>
+                </td>
+                <td colspan="2" align="center">
+                  <input type="submit"
+                    class="entry-button"
+                    value="&#10003; submit"
+                  />
+                  <input
+                    type="reset"
+                    class="entry-button"
+                    style="background-color: #ea5453; margin-left: 3rem"
+                    value="↻ Refresh"
+                  />
+                </td>
+              </tr>
+              <tr hidden>
+                <td><input type="text" id="depotname" name="depo_id"></td>
+            </tr>
+            </table>
+          </form>
+        </div>
+  </section>
+  
+
+ 
+  <script>
+    $(document).ready(function () {
+      let value = sessionStorage.getItem('depot_Name')
+      $('#depotname').val(value);
+  });
+    $(document).ready(function() {
+      $('.radio').click(function() {
+        $(this).find('input[type="radio"]').prop('checked', true);
+      });
+    });
+    </script>
+
+  {% if messages %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    {% for msg in messages %}
+        {% if msg.tags == 'success' %}
+            <script>
+                Swal.fire({
+                    icon: '{{msg.tags}}',
+                    title: '{{msg}}',
+                    showConfirmButton: true,
+                    confirmButtonClass: 'btn btn-success'
+                });
+            </script>
+        {% endif %}
+    {% endfor %}
+  {% endif %}
+
+{% endblock content %}

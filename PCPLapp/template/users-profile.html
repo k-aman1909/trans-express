@@ -1,0 +1,272 @@
+{% extends aman.page_name %}
+{% load static %}
+{% block extralinks %}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="{% static 'css/profilemain.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/complete-validation.js' %}"></script>
+
+{% endblock extralinks %}
+{% block content %}
+
+
+<section class="main-sec">
+
+    <div class="right-side">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <table>
+                <tr>
+                    <td colspan="2" style="height:60px;">
+                        <legend class="l1">Personal Details </legend>
+                    </td>
+                </tr>
+            <tr>
+                <td rowspan="3" class="e_img">
+                    <div class="for-img " title="Upload image">
+
+                        <label class="l_upload" for="pic" title="Upload image" style="z-index: 1;"><img
+                            {% if aman.profile.profile_pic %} src="{{ aman.profile.profile_pic.url }}" {% else %} src="{% static 'image/upload.jpg' %}"  {% endif %} class="auto-img" alt="uploding Image" >Upload
+                            Employee Photo</label>
+                        <input type="file" id="pic" src="" name="profile_pic" style="display: none;" onchange="previewImage(event)">
+                        <div class="img-box">
+                            <img style="width: 100%; " alt="uploding Image">
+
+                        </div>
+                                  
+                    </div>
+                </td>
+                
+                
+                
+                <td><label for="name" class="l_fixed">User ID</label><i class="fa-solid fa-user-tie i"></i><input
+                        type="text" placeholder="User ID" title="You Cant change the UserID" name="userid" id="name" class="b" onclick="userid('#name')" value="{{aman.username}}"
+                        style="text-transform: lowercase;cursor:not-allowed;" readonly><span></span></td>
+                        <td><label for="usr" class="l_fixed">User Name</label><i class="fa-regular fa-user i"></i><input
+                            type="text" id="Name" title="You Cant change the Username" readonly placeholder="Name"  name="first_name" class="a" onclick="alphabets('#Name')"   style="text-transform: capitalize;cursor:not-allowed;" value="{{aman.profile.first_name}}"><span></span></td>
+                        </tr>
+            <tr>
+                
+                <td><label for="contno" class="l_fixed">Contact No.</label><i class="fa-solid fa-phone i"></i><input
+                    type="text" placeholder="Contact No." onclick="number('#contno')" id="contno" name="cont_no" class="num" value="{{aman.profile.cont_no}}"><span></span>
+                </td>
+                <td><label for="email" class="l_fixed">Email</label><i class="fa-regular fa-envelope i"></i><input
+                    type="email" id="email" name="email" placeholder="Email" value="{{aman.profile.email}}" class="b" style="text-transform: lowercase;capitalize;cursor:not-allowed;" readonly
+                    autocomplete="off"><br><span></span></td>
+                </tr>
+                <tr>
+                    
+                    
+                    <td><label for="gndr" style="display: block; background-color: transparent;">Gender</label>
+                        <div class="dgndr" style="display:flex;justify-content:space-evenly;">
+                            <div style="cursor: pointer;" class="radio"><input type="radio" value="male" name="gender" id="gndr" {% if aman.profile.gender == 'male' %} checked {% else %} checked {% endif %}>Male</div>
+                            <div style="cursor: pointer;" class="radio"><input type="radio" value="female" name="gender" id="gndr" {% if aman.profile.gender == 'female' %} checked {% endif %}>Female</div>
+                            <div style="cursor: pointer;" class="radio"><input type="radio" value="other" name="gender" id="gndr" {% if aman.profile.gender == 'other' %} checked {% endif %}> Others</div>
+                        </div>
+                    </td>
+                    <td><label for="dob" style="display: block;" class="l_fixed">D.O.B*</label><i
+                        class="fa-regular fa-calendar i"></i><input type="date" name="dob" value="{{aman.profile.dob}}" id="dob" class="date"
+                        ><br><span></span>
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    
+                    <td>
+                        {% comment %} <label> State<font style="color:red;">*</font></label> {% endcomment %}
+
+                        <select name="state" id="myst" required>
+                            <option value="" selected disabled>----- Select Any State -----</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Chattisgarh">Chattisgarh</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="jammu & Kashmir">Jammu & Kashmir</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Andaman & Nicobar">Andaman & Nicobar</option>
+                                <option value="Dadra & Nagar Haveli and Daman & Diu">Dadra & Nagar Haveli and Daman
+                                    & Diu</option>
+                                <option value="Pondicherry">Pondicherry</option>
+                                <option value="Nagaland"> Nagaland</option>
+
+                        </select>
+                        <span></span>
+                    </td>
+                    <td>
+                        
+                        {{data.distr}}
+                            <select name="district" id="mydist" required>
+                                <option value="" selected disabled>----- Select Any District -----</option>
+                                {% for data in data %}
+                                
+                                    <option value="{{data}}" selected>{{data}}</option>
+                                {% endfor %}
+                            </select>
+                            <span></span>
+                    </td>
+                <td><label for="pin" class="l_fixed">Pin Code</label><i class="fa-solid fa-location-pin i"></i><input
+                    type="text" id="pincode" placeholder="Pin Code" name="pincode" class="pcode" value="{{aman.profile.pincode}}" onfocus="p_code('#pincode')" maxlength="6"><span></span>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <label for="loctn" class="l_fixed" style="display: block;">Address</label>
+                    <i class="fa-solid fa-building i"></i>
+                    <input type="text" name="adrs" onclick="address('#loctn')" id="loctn" style="width: 98%;" value="{{aman.profile.adrs}}" autocomplete="off"
+                    placeholder="flat/street/landmark" >
+                    <span></span>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="3">
+                    <input type="submit" class="entry-button" value="&#9998; Update">
+                    <input type="button"  class="entry-button" style="background-color:#EA5453;margin-left:3rem;"
+                    value="&#128473 Cancel"  onclick="window.location.href='{% url "index" %}'">
+                </td>
+            </tr>
+            
+
+        </table>
+    </form>
+    </div>
+
+    
+</section>
+<script>
+    $(document).ready(function() {
+      $('.radio').click(function() {
+        $(this).find('input[type="radio"]').prop('checked', true);
+      });
+      $("#myst option[value='" + '{{aman.profile.state}}' + "']").prop('selected', true);
+      dis = '{{aman.profile.distr}}'.replace('&amp;', '&')
+
+        $("#mydist option[value='" + dis + "']").prop('selected', true);
+    });
+    </script>
+    {% if messages %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+{% for msg in messages %}
+<script>
+    Swal.fire({
+        icon: '{{msg.tags}}',
+        title: '{{msg}}',
+        showConfirmButton: true,
+        confirmButtonClass: 'btn btn-success'
+    });
+</script>
+{% endfor %}
+{% endif %}
+    <script>
+        $('select[name="state"]').change(function () {
+            $.ajax({
+                method: 'GET',
+                url: "/fghevbn/ajaxcall/",
+                dataType: "json",
+                data: {
+                    'cond':'state',
+                    'uname': $(this).val(),
+                },
+                success: function (response) {
+                    if (response == 'None') {
+                        sweetAlert("Warning!", 'There is no record of mode available for ' + uname + '', "warning");
+                    }
+                    else {
+                        $('select[name="district"]').html(response);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
+    <script>
+        function p_code(no) {
+            $(no).keypress(function (e) {
+              var len = $(this).val().length;
+              if (len == 6) {
+                $(no)
+                  .siblings("span")
+                  .html("Maximum 6 digits are allowed")
+                  .css({ color: "red" });
+                // $(no).siblings('label').css({ 'top': '-.8rem' })
+                e.preventDefault();
+              } else if (!(e.which >= 48 && e.which <= 57)) {
+                $(no)
+                  .siblings("span")
+                  .html("Only Digits are Allowed")
+                  .css({ color: "red" });
+                // $(no).siblings('label').css({ 'top': '-.8rem' })
+                $(this).siblings("label").css({ color: "red" });
+                e.preventDefault();
+              } else if (e.which == 48) {
+                if (e.target.selectionStart === 0) return false;
+              } else {
+                $(no).siblings("span").html("");
+          
+                $(this).siblings("label").css({ color: "green" });
+                $(this).css({ border: "none" });
+              }
+            });
+            $(no).focusout(function (e) {
+              var len = $(this).val().length;
+              if (len < 6) {
+                $(no)
+                  .siblings("span")
+                  .html("Minimum 6 digits are required")
+                  .css({ color: "red" });
+          
+                $(this).siblings("label").css({ color: "red" });
+              } else if (len == 6) {
+                $(this).siblings("label").css({ color: "green" });
+                $(this).siblings("span").html("");
+              } else if (
+                len == 0 &&
+                $(this).siblings("span").html("") == "Only Digits are Allowed"
+              ) {
+                // $(this).css({ 'border': '2px solid green' })
+                $(this).siblings("span").html("");
+              } else if ($(this).val() == "") {
+                $(this).val("This is mandatory*");
+                // $(a).siblings('label').css({ 'top': '-.8rem' })
+                $(this).css({ color: "red" });
+                $(this).siblings("span").html("");
+                e.preventDefault();
+              }
+            });
+          }
+    </script>
+{% endblock content %}

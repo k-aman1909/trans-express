@@ -1,0 +1,100 @@
+{% extends aman.page_name %}
+{% block extralinks %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{% static 'css/p.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/complete-validation.js' %}"></script>
+{% endblock extralinks %}
+{% block content %}
+<section class="main-content">
+    <section class="table-content">
+        <div class="table-content-div search-section">
+            <h2>Search User</h2>
+            <form method="post" id="search">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>
+                            <label style="position: absolute;top:1.5rem;display: none;">Depot Name </label><br>
+                            <select name="depo_name" id="depot">
+                                <option value="" selected disabled>---- Search Depot ----</option>
+                                {% for a in data.user %}
+                                <option value="{{a.diponame}}">{{a.diponame}}</option>
+                                {% endfor %}
+                            </select>
+                            <br><span></span>
+                        </td>
+                        <td align="center"><br>
+                            <input type="button" id="submit" class="entry-button" value="🔎 Search">
+                            <input type="reset" class="entry-button" style="background-color:#EA5453;margin-left:3rem;"
+                                value="↻ Refresh">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        </h3>
+    </section>
+    <div class="search-table">
+
+    </div>
+    <br>
+    <script>
+        $(document).ready(function () {
+            $('#submit').click(function (e) {
+                $.ajax({
+                    url: "{% url "search" %}",
+                    type: "POST",
+                    data: $('#search').serialize(),
+                    success: function (response) {
+                        if (response.success == true) {
+                            $('.search-table').html(response.value);
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: response.message,
+                                showConfirmButton: true,
+                                confirmButtonClass: 'btn btn-success'
+                            });
+                        }
+                    }
+                });
+            });
+            $('#depot').change(function(){
+                $(this).siblings('label').css({'display':'block'})
+            })
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    {% if messages %}
+    {% for msg in messages %}
+    {% if msg.tags == 'success' %}
+    <script>
+        Swal.fire({
+            icon: '{{msg.tags}}',
+            title: '{{msg}}',
+            showConfirmButton: true,
+            confirmButtonClass: 'btn btn-success'
+        });
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    <script>
+        function inactive_user(username) {
+                var useridURL = `{% url 'search' %}?username=${username}`;
+                $.get(useridURL, function (response) {
+                    if (response.status == true) {
+                        window.location.reload();
+                    }
+                });
+            }
+
+
+
+    </script>
+    {% endblock content %}

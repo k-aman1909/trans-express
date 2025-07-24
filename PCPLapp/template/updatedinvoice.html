@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generation</title>
+    <link rel="icon" href="pcpllogo.png">
+    {% load static %}
+    <style>
+        .page {
+            width: 210mm;height: 297mm;
+            margin: 0 auto;
+            border: 1px solid black;
+            /*page-break-after: always;*/
+            /*padding: 20mm;*/
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        table{
+            border-collapse: collapse;
+        }
+        @media print{
+            button{
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section  id="content" style="width: 210mm;height: 600mm;font-size:90%">
+        <section class="page" style="display:flex;flex-direction:column;gap:.2rem;justify-content:space-between;">
+            <div style="height: 49%;width:100%;display:flex;flex-direction:column;position:relative;border-bottom:solid 1px black">
+                <div>
+                    <b style="margin-left: 30%;"><span>Subject to Patna Jurisdiction only</span><span style="margin-left: 25%;">Office Copy</span></b>
+                </div>
+                <div style="height:20%;display:flex;border-top:solid 1px black">
+                    <div style="width: 80%;height:100%;display:flex;column-gap:.2rem;border-right:solid 1px black">
+                        <div style="width: 20%;padding:.5rem">
+                            <img src="{% static 'image/pcpllogo.jpg' %}" alt="" style="width: 100%;height:100%;">
+                        </div>
+                        <div style="width: 80%;text-align:center;">
+                            <b style="font-{{data.invoice.weight}} {{data.invoice.weig}}: bolder;font-size:2rem" class="pl">TransExpress</b>
+                            <p><label for=""><b>Adm. Office:- </b></label><b>Dumri Kothi, Ashok Raj Path, Patna-800001</b></p>
+                            <!-- <p>BIHAR 800001</p> -->
+                             <p><b>GSTIN: </b><span class="gst">{{data.gst}}</span><b style="margin-left:1rem">PAN: </b><span class="pan">{{data.pan}}</span></p>
+                        </div>
+                    </div>
+                    <div style="width: 20%;height:100%;text-align:center;">
+                        <p><b>LR No : </b></p>
+                        <p class="lrno">{{data.invoice.order_id}}</p>
+                        <p><b>Date : </b><span class="lrda">{{data.invoice.lr_date}}</span></p>
+                    </div>
+                </div>
+                <div style="height:20%;display:flex;border-top:solid 1px black">
+                    <div style="width: 40%;text-align:center;border-right:solid 1px black">
+                        <b>Consignor</b><br>
+                        <label class="dipo_add">{{data.adrs}}</label>
+                    </div>
+                    <div style="width: 40%;text-align:center;border-right:solid 1px black">
+                        <b>Consignee</b><br>
+                        <label class="dis_add">{{data.distadrs}}</label>
+                    </div>
+                    <div style="width: 20%;text-align:center;">
+                        <p><b>From: </b><span class="from">Patna</span></p>
+                        <p><b>To: </b><span class="to">{{data.invoice.dist_town}}</span></p>
+                    </div>
+                </div>
+                <div style="height:45%;border-top:solid 1px black">
+                    <table style="width: 100%;height:100%;">
+                        <tr style="border-bottom:solid 1px black;text-align:center">
+                            <td style="border-right:solid 1px black"><b>No. Of Pkgs</b></td>
+                            <td colspan="4" style="border-right:solid 1px black"><b>Particulars Of Goods Said To Contained</b></td>
+                            <td><b>Actual Weight</b></td>
+                            <td rowspan="4" style="padding: 0;">
+                                <table style="width: 100%;height:100%">
+                                    <tr style="border-bottom:solid 1px black">
+                                        <td rowspan="2" style="border-left:solid 1px black"><b>Date</b></td>
+                                        <td colspan="2" style="border-left:solid 1px black"><b>Amount</b></td>
+                                    </tr>
+                                    <tr style="border-bottom:solid 1px black">
+                                        <td style="border-left:solid 1px black">Rs.</td>
+                                        <td style="border-left:solid 1px black">P.</td>
+                                    </tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">P.F</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Loading</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Ins. Ch.</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">B Chrg.</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Total</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Advance</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black">Balance</td><td style="border-left:solid 1px black">0</td><td style="border-left:solid 1px black"></td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:solid 1px black;text-align:center">
+                             <td style="border-right:solid 1px black;"><label class="qu">{{data.invoice.quantity}} {{data.invoice.quan}}</label></td>
+                             <td colspan="4" style="text-align: left;"><label class="pd"  style="text-transform:uppercase;">{{data.invoice.diponame}}</label>
+                                 <p><b>Invno   : &nbsp;</b><label class="i_no">{{data.invoice.invoice_no}}</label></p>
+                                 <p><b>Inv<b>Date :</b> &nbsp; </b><label class="i_da">{{data.invoice.invoice_date}}</label></p>
+                                 <p><b>Permit No  : &nbsp; </b>Attached</p>
+                             </td>
+                             <td rowspan="3" style="border-left:solid 1px black"><label class="we">{{data.invoice.weight}} {{data.invoice.weig}}</label></td>
+                         </tr>
+                         <tr style="border-bottom:solid 1px black">
+                             <td colspan="5" style="text-align: left;"><b>Goods Value : &nbsp;&nbsp; </b><label class="i_val">{{data.invoice.invoice_val}}</label></td>
+                         </tr>
+                         <tr style="border-bottom:solid 1px black">
+                             <td colspan="5" style="text-align: left;"><b> Lorry No. : &nbsp;&nbsp; </b><label class="v_no" style="text-transform:uppercase;">{{data.invoice.v_no}}</label></td>
+                         </tr>
+                         <tr>
+                             <td colspan="7" style="text-align: left;">
+                             <b> Transporter Name : &nbsp; </b><label class="t_n" style="text-transform:uppercase;">{{data.invoice.trnas_name}}</label>
+                             <b style="margin-left: 10%;"> Vehicle Type : &nbsp; </b><label class="v_t">{{data.invoice.v_type}}</label></td>
+                         </tr>
+                    </table>
+                </div>
+                <div style="height:15%;border-top:solid 1px black">
+                    <b>Remark:-</b><br>
+                    <div style="font-size: 80%;line-height:1rem;">Goods Carried at Owner's Risk, insured with the company against specific risk.<br>
+                        Owner's responsibility for Wrong declaration or goods octroi terminal Tax & other on-route for other terms, see overleaf.<br>
+                        Absolutely on Owner's Risk Company has no liability towards Insuarance Company.</div> <br>
+                    <div style="position:absolute;bottom:.5rem;right:3rem"><b>Signature</b></div>
+                </div>
+            </div>
+            <div style="height: 49%;width:100%;display:flex;flex-direction:column;position:relative;">
+                <div>
+                    <b style="margin-left: 30%;"><span>Subject to Patna Jurisdiction only</span><span style="margin-left: 25%;">Consignee Copy</span></b>
+                </div>
+                <div style="height:20%;display:flex;border-top:solid 1px black">
+                    <div style="width: 80%;height:100%;display:flex;column-gap:.2rem;border-right:solid 1px black">
+                        <div style="width: 20%;padding:.5rem">
+                            <img src="{% static 'image/pcpllogo.jpg' %}" alt="" style="width: 100%;height:100%;">
+                        </div>
+                        <div style="width: 80%;text-align:center;">
+                            <b style="font-{{data.invoice.weight}} {{data.invoice.weig}}: bolder;font-size:2rem" class="pl">TransExpress</b>
+                            <p><label for=""><b>Adm. Office:- </b></label><b>Dumri Kothi, Ashok Raj Path, Patna-800001</b></p>
+                            <!-- <p>BIHAR 800001</p> -->
+                             <p><b>GSTIN: </b><span class="gst">{{data.gst}}</span><b style="margin-left:1rem">PAN: </b><span class="pan">{{data.pan}}</span></p>
+                        </div>
+                    </div>
+                    <div style="width: 20%;height:100%;text-align:center;">
+                        <p><b>LR No : </b></p>
+                        <p class="lrno">{{data.invoice.order_id}}</p>
+                        <p><b>Date : </b><span class="lrda">{{data.invoice.lr_date}}</span></p>
+                    </div>
+                </div>
+                <div style="height:20%;display:flex;border-top:solid 1px black">
+                    <div style="width: 40%;text-align:center;border-right:solid 1px black">
+                        <b>Consignor</b><br>
+                        <label class="dipo_add">{{data.adrs}}</label>
+                    </div>
+                    <div style="width: 40%;text-align:center;border-right:solid 1px black">
+                        <b>Consignee</b><br>
+                        <label class="dis_add">{{data.distadrs}}</label>
+                    </div>
+                    <div style="width: 20%;text-align:center;">
+                        <p><b>From: </b><span class="from">Patna</span></p>
+                        <p><b>To: </b><span class="to">{{data.invoice.dist_town}}</span></p>
+                    </div>
+                </div>
+                <div style="height:45%;border-top:solid 1px black">
+                    <table style="width: 100%;height:100%;">
+                        <tr style="border-bottom:solid 1px black;text-align:center">
+                            <td style="border-right:solid 1px black"><b>No. Of Pkgs</b></td>
+                            <td colspan="4" style="border-right:solid 1px black"><b>Particulars Of Goods Said To Contained</b></td>
+                            <td><b>Actual Weight</b></td>
+                            <td rowspan="4" style="padding: 0;">
+                                <table style="width: 100%;height:100%">
+                                    <tr style="border-bottom:solid 1px black">
+                                        <td rowspan="2" style="border-left:solid 1px black"><b>Date</b></td>
+                                        <td colspan="2" style="border-left:solid 1px black"><b>Amount</b></td>
+                                    </tr>
+                                    <tr style="border-bottom:solid 1px black">
+                                        <td style="border-left:solid 1px black">Rs.</td>
+                                        <td style="border-left:solid 1px black">P.</td>
+                                    </tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">P.F</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Loading</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Ins. Ch.</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">B Chrg.</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Total</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Advance</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black">Balance</td><td style="border-left:solid 1px black">0</td><td style="border-left:solid 1px black"></td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:solid 1px black;text-align:center">
+                             <td style="border-right:solid 1px black;"><label class="qu">{{data.invoice.quantity}} {{data.invoice.quan}}</label></td>
+                             <td colspan="4" style="text-align: left;"><label class="pd"  style="text-transform:uppercase;">{{data.invoice.diponame}}</label>
+                                 <p><b>Invno   : &nbsp;</b><label class="i_no">{{data.invoice.invoice_no}}</label></p>
+                                 <p><b>Inv<b>Date :</b> &nbsp; </b><label class="i_da">{{data.invoice.invoice_date}}</label></p>
+                                 <p><b>Permit No  : &nbsp; </b>Attached</p>
+                             </td>
+                             <td rowspan="3" style="border-left:solid 1px black"><label class="we">{{data.invoice.weight}} {{data.invoice.weig}}</label></td>
+                         </tr>
+                         <tr style="border-bottom:solid 1px black">
+                             <td colspan="5" style="text-align: left;"><b>Goods Value : &nbsp;&nbsp; </b><label class="i_val">{{data.invoice.invoice_val}}</label></td>
+                         </tr>
+                         <tr style="border-bottom:solid 1px black">
+                             <td colspan="5" style="text-align: left;"><b> Lorry No. : &nbsp;&nbsp; </b><label class="v_no" style="text-transform:uppercase;">{{data.invoice.v_no}}</label></td>
+                         </tr>
+                         <tr>
+                             <td colspan="7" style="text-align: left;">
+                             <b> Transporter Name : &nbsp; </b><label class="t_n" style="text-transform:uppercase;">{{data.invoice.trnas_name}}</label>
+                             <b style="margin-left: 10%;"> Vehicle Type : &nbsp; </b><label class="v_t">{{data.invoice.v_type}}</label></td>
+                         </tr>
+                    </table>
+                </div>
+                <div style="height:15%;border-top:solid 1px black">
+                    <b>Remark:-</b><br>
+                    <div style="font-size: 80%;line-height:1rem;">Goods Carried at Owner's Risk, insured with the company against specific risk.<br>
+                        Owner's responsibility for Wrong declaration or goods octroi terminal Tax & other on-route for other terms, see overleaf.<br>
+                        Absolutely on Owner's Risk Company has no liability towards Insuarance Company.</div> <br>
+                    <div style="position:absolute;bottom:.5rem;right:3rem"><b>Signature</b></div>
+                </div>
+            </div>
+        </section>
+        <section class="page" style="display:flex;flex-direction:column;gap:.2rem;justify-content:space-between;margin-top:3rem;">
+            <div style="height: 49%;width:100%;display:flex;flex-direction:column;position:relative;border-bottom:solid 1px black">
+                <div>
+                    <b style="margin-left: 30%;"><span>Subject to Patna Jurisdiction only</span><span style="margin-left: 25%;">Consignor Copy</span></b>
+                </div>
+                <div style="height:20%;display:flex;border-top:solid 1px black">
+                    <div style="width: 80%;height:100%;display:flex;column-gap:.2rem;border-right:solid 1px black">
+                        <div style="width: 20%;padding:.5rem">
+                            <img src="{% static 'image/pcpllogo.jpg' %}" alt="" style="width: 100%;height:100%;">
+                        </div>
+                        <div style="width: 80%;text-align:center;">
+                            <b style="font-{{data.invoice.weight}} {{data.invoice.weig}}: bolder;font-size:2rem" class="pl">TransExpress</b>
+                            <p><label for=""><b>Adm. Office:- </b></label><b>Dumri Kothi, Ashok Raj Path, Patna-800001</b></p>
+                            <!-- <p>BIHAR 800001</p> -->
+                             <p><b>GSTIN: </b><span class="gst">{{data.gst}}</span><b style="margin-left:1rem">PAN: </b><span class="pan">{{data.pan}}</span></p>
+                        </div>
+                    </div>
+                    <div style="width: 20%;height:100%;text-align:center;">
+                        <p><b>LR No : </b></p>
+                        <p class="lrno">{{data.invoice.order_id}}</p>
+                        <p><b>Date : </b><span class="lrda">{{data.invoice.lr_date}}</span></p>
+                    </div>
+                </div>
+                <div style="height:20%;display:flex;border-top:solid 1px black">
+                    <div style="width: 40%;text-align:center;border-right:solid 1px black">
+                        <b>Consignor</b><br>
+                        <label class="dipo_add">{{data.adrs}}</label>
+                    </div>
+                    <div style="width: 40%;text-align:center;border-right:solid 1px black">
+                        <b>Consignee</b><br>
+                        <label class="dis_add">{{data.distadrs}}</label>
+                    </div>
+                    <div style="width: 20%;text-align:center;">
+                        <p><b>From: </b><span class="from">Patna</span></p>
+                        <p><b>To: </b><span class="to">{{data.invoice.dist_town}}</span></p>
+                    </div>
+                </div>
+                <div style="height:45%;border-top:solid 1px black">
+                    <table style="width: 100%;height:100%;">
+                        <tr style="border-bottom:solid 1px black;text-align:center">
+                            <td style="border-right:solid 1px black"><b>No. Of Pkgs</b></td>
+                            <td colspan="4" style="border-right:solid 1px black"><b>Particulars Of Goods Said To Contained</b></td>
+                            <td><b>Actual Weight</b></td>
+                            <td rowspan="4" style="padding: 0;">
+                                <table style="width: 100%;height:100%">
+                                    <tr style="border-bottom:solid 1px black">
+                                        <td rowspan="2" style="border-left:solid 1px black"><b>Date</b></td>
+                                        <td colspan="2" style="border-left:solid 1px black"><b>Amount</b></td>
+                                    </tr>
+                                    <tr style="border-bottom:solid 1px black">
+                                        <td style="border-left:solid 1px black">Rs.</td>
+                                        <td style="border-left:solid 1px black">P.</td>
+                                    </tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">P.F</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Loading</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Ins. Ch.</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">B Chrg.</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Total</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Advance</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black">Balance</td><td style="border-left:solid 1px black">0</td><td style="border-left:solid 1px black"></td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:solid 1px black;text-align:center">
+                             <td style="border-right:solid 1px black;"><label class="qu">{{data.invoice.quantity}} {{data.invoice.quan}}</label></td>
+                             <td colspan="4" style="text-align: left;"><label class="pd"  style="text-transform:uppercase;">{{data.invoice.diponame}}</label>
+                                 <p><b>Invno   : &nbsp;</b><label class="i_no">{{data.invoice.invoice_no}}</label></p>
+                                 <p><b>Inv<b>Date :</b> &nbsp; </b><label class="i_da">{{data.invoice.invoice_date}}</label></p>
+                                 <p><b>Permit No  : &nbsp; </b>Attached</p>
+                             </td>
+                             <td rowspan="3" style="border-left:solid 1px black"><label class="we">{{data.invoice.weight}} {{data.invoice.weig}}</label></td>
+                         </tr>
+                         <tr style="border-bottom:solid 1px black">
+                             <td colspan="5" style="text-align: left;"><b>Goods Value : &nbsp;&nbsp; </b><label class="i_val">{{data.invoice.invoice_val}}</label></td>
+                         </tr>
+                         <tr style="border-bottom:solid 1px black">
+                             <td colspan="5" style="text-align: left;"><b> Lorry No. : &nbsp;&nbsp; </b><label class="v_no" style="text-transform:uppercase;"> {{data.invoice.v_no}}</label></td>
+                         </tr>
+                         <tr>
+                             <td colspan="7" style="text-align: left;">
+                             <b> Transporter Name : &nbsp; </b><label class="t_n" style="text-transform:uppercase;">{{data.invoice.trnas_name}}</label>
+                             <b style="margin-left: 10%;"> Vehicle Type : &nbsp; </b><label class="v_t">{{data.invoice.v_type}}</label></td>
+                         </tr>
+                    </table>
+                </div>
+                <div style="height:15%;border-top:solid 1px black">
+                    <b>Remark:-</b><br>
+                    <div style="font-size: 80%;line-height:1rem;">Goods Carried at Owner's Risk, insured with the company against specific risk.<br>
+                        Owner's responsibility for Wrong declaration or goods octroi terminal Tax & other on-route for other terms, see overleaf.<br>
+                        Absolutely on Owner's Risk Company has no liability towards Insuarance Company.</div> <br>
+                    <div style="position:absolute;bottom:.5rem;right:3rem"><b>Signature</b></div>
+                </div>
+            </div>
+            <div style="height: 49%;width:100%;display:flex;flex-direction:column;position:relative;">
+                <div>
+                    <b style="margin-left: 30%;"><span>Subject to Patna Jurisdiction only</span><span style="margin-left: 25%;">Driver Copy</span></b>
+                </div>
+                <div style="height:20%;display:flex;border-top:solid 1px black">
+                    <div style="width: 80%;height:100%;display:flex;column-gap:.2rem;border-right:solid 1px black">
+                        <div style="width: 20%;padding:.5rem">
+                            <img src="{% static 'image/pcpllogo.jpg' %}" alt="" style="width: 100%;height:100%;">
+                        </div>
+                        <div style="width: 80%;text-align:center;">
+                            <b style="font-{{data.invoice.weight}} {{data.invoice.weig}}: bolder;font-size:2rem" class="pl">TransExpress</b>
+                            <p><label for=""><b>Adm. Office:- </b></label><b>Dumri Kothi, Ashok Raj Path, Patna-800001</b></p>
+                            <!-- <p>BIHAR 800001</p> -->
+                             <p><b>GSTIN: </b><span class="gst">{{data.gst}}</span><b style="margin-left:1rem">PAN: </b><span class="pan">{{data.pan}}</span></p>
+                        </div>
+                    </div>
+                    <div style="width: 20%;height:100%;text-align:center;">
+                        <p><b>LR No : </b></p>
+                        <p class="lrno">{{data.invoice.order_id}}</p>
+                        <p><b>Date : </b><span class="lrda">{{data.invoice.lr_date}}</span></p>
+                    </div>
+                </div>
+                <div style="height:20%;display:flex;border-top:solid 1px black">
+                    <div style="width: 40%;text-align:center;border-right:solid 1px black">
+                        <b>Consignor</b><br>
+                        <label class="dipo_add">{{data.adrs}}</label>
+                    </div>
+                    <div style="width: 40%;text-align:center;border-right:solid 1px black">
+                        <b>Consignee</b><br>
+                        <label class="dis_add">{{data.distadrs}}</label>
+                    </div>
+                    <div style="width: 20%;text-align:center;">
+                        <p><b>From: </b><span class="from">Patna</span></p>
+                        <p><b>To: </b><span class="to">{{data.invoice.dist_town}}</span></p>
+                    </div>
+                </div>
+                <div style="height:45%;border-top:solid 1px black">
+                    <table style="width: 100%;height:100%;">
+                        <tr style="border-bottom:solid 1px black;text-align:center">
+                            <td style="border-right:solid 1px black"><b>No. Of Pkgs</b></td>
+                            <td colspan="4" style="border-right:solid 1px black"><b>Particulars Of Goods Said To Contained</b></td>
+                            <td><b>Actual Weight</b></td>
+                            <td rowspan="4" style="padding: 0;">
+                                <table style="width: 100%;height:100%">
+                                    <tr style="border-bottom:solid 1px black">
+                                        <td rowspan="2" style="border-left:solid 1px black"><b>Date</b></td>
+                                        <td colspan="2" style="border-left:solid 1px black"><b>Amount</b></td>
+                                    </tr>
+                                    <tr style="border-bottom:solid 1px black">
+                                        <td style="border-left:solid 1px black">Rs.</td>
+                                        <td style="border-left:solid 1px black">P.</td>
+                                    </tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">P.F</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Loading</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Ins. Ch.</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">B Chrg.</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Total</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black;border-bottom:solid 1px black">Advance</td><td style="border-left:solid 1px black;border-bottom:solid 1px black">0</td><td style="border-left:solid 1px black;border-bottom:solid 1px black"></td></tr>
+                                    <tr><td style="border-left:solid 1px black">Balance</td><td style="border-left:solid 1px black">0</td><td style="border-left:solid 1px black"></td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:solid 1px black;text-align:center">
+                             <td style="border-right:solid 1px black;"><label class="qu">{{data.invoice.quantity}} {{data.invoice.quan}}</label></td>
+                             <td colspan="4" style="text-align: left;"><label class="pd"  style="text-transform:uppercase;">{{data.invoice.diponame}}</label>
+                                 <p><b>Invno   : &nbsp;</b><label class="i_no">{{data.invoice.invoice_no}}</label></p>
+                                 <p><b>Inv<b>Date :</b> &nbsp; </b><label class="i_da">{{data.invoice.invoice_date}}</label></p>
+                                 <p><b>Permit No  : &nbsp; </b>Attached</p>
+                             </td>
+                             <td rowspan="3" style="border-left:solid 1px black"><label class="we">{{data.invoice.weight}} {{data.invoice.weig}}</label></td>
+                         </tr>
+                         <tr style="border-bottom:solid 1px black">
+                             <td colspan="5" style="text-align: left;"><b>Goods Value : &nbsp;&nbsp; </b><label class="i_val">{{data.invoice.invoice_val}}</label></td>
+                         </tr>
+                         <tr style="border-bottom:solid 1px black">
+                             <td colspan="5" style="text-align: left;"><b> Lorry No. : &nbsp;&nbsp; </b><label class="v_no" style="text-transform:uppercase;">{{data.invoice.v_no}}</label></td>
+                         </tr>
+                         <tr>
+                             <td colspan="7" style="text-align: left;">
+                             <b> Transporter Name : &nbsp; </b><label class="t_n" style="text-transform:uppercase;">{{data.invoice.trnas_name}}</label>
+                             <b style="margin-left: 10%;"> Vehicle Type : &nbsp; </b><label class="v_t">{{data.invoice.v_type}}</label></td>
+                         </tr>
+                    </table>
+                </div>
+                <div style="height:15%;border-top:solid 1px black">
+                    <b>Remark:-</b><br>
+                    <div style="font-size: 80%;line-height:1rem;">Goods Carried at Owner's Risk, insured with the company against specific risk.<br>
+                        Owner's responsibility for Wrong declaration or goods octroi terminal Tax & other on-route for other terms, see overleaf.<br>
+                        Absolutely on Owner's Risk Company has no liability towards Insuarance Company.</div> <br>
+                    <div style="position:absolute;bottom:.5rem;right:3rem"><b>Signature</b></div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <button onclick="printContent()" id="printButton" style="margin-top: 3%;margin-left:25%;background-color:rgb(8, 123, 176);color:white;border:none;border-radius:.2rem;padding:.5rem 1rem;">&#128438; Print Content</button>
+    <script type="text/javascript" src="./invoice.js">
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $('#printButton').on('click', function() {
+              window.print();
+            });
+          });
+        $(document).ready(function () {
+            let value = sessionStorage.getItem('depot_Name')
+            $('#deponame').val(value);
+        });
+    </script>
+</body>
+</html>

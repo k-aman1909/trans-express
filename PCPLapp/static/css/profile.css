@@ -1,0 +1,421 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 15px;
+}
+
+body {
+    background-color: rgb(224, 224, 242);
+}
+
+.main-sec{
+    /* border: 2px solid red; */
+    display: flex;
+    height: auto;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    /* position: relative; */
+}
+
+
+
+
+.side {
+    /* position: absolute; */
+    background-color: white;
+    width: 32%;
+    height: auto;
+    /* padding-bottom: 10rem; */
+    /* margin: auto; */
+    /* margin-bottom: 2rem; */
+    /* left: 2%; */
+    border-radius: .5rem;
+  
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+#abt {
+    resize: none;
+    border: 1px solid black;
+    margin-left: 10%;
+    padding-top: 1.5rem;
+    padding-left: 2rem;
+    width: 80%;
+    outline: none;
+    text-transform: capitalize;
+    height: 40%;
+}
+
+
+
+
+
+
+.dimg {
+
+    margin: 5rem auto 5rem auto;
+    border: 1px solid black;
+    width: 16rem;
+    border-radius: 50%;
+    /* background-color: rgb(18, 18, 56); */
+    cursor: pointer;
+    /* background-color: rgb(39, 39, 87); */
+
+    /* z-index: 1; */
+    height: 16rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+
+
+.dimg input[type='file'] {
+    visibility: hidden;
+}
+
+.img-box{
+    /* border: 2px solid red; */
+    border-radius: 50%;
+}
+
+.uid {
+    margin: -3rem auto 2.5rem auto;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.d1 {
+    
+    left: 37%;
+    border-radius: 1rem;
+    /* border: 2px solid black; */
+    width: 65%;
+    /* height: 55rem; */
+}
+
+.d1 table,
+td {
+    position: relative;
+    /* border: 2px solid red; */
+    border-collapse: collapse;
+}
+
+.d1 table {
+    background-color: white;
+    width: 100%;
+    border-radius: .5rem;
+    height: 100%;
+}
+
+.d1 td {
+    height: 7rem;
+    width: 45.5%;
+    padding-left: 3.5rem;
+}
+
+.d1 input[type=text],
+input[type=date],
+input[type=email] {
+    position: absolute;
+    top: 0;
+    width: 80%;
+    height: 60%;
+    padding-left: 4rem;
+    border: none;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.d1 select {
+    position: absolute;
+    top: 0;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 80%;
+    height: 60%;
+    text-align: center;
+    border: none;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.d1 td .label1 {
+    position: absolute;
+    top: -1rem;
+    display: none;
+    font-size: 1.5rem;
+    z-index: 1;
+    left: 5rem;
+    background-color: white;
+    color: rgb(123, 119, 119);
+}
+
+.d1 td .label2 {
+    position: absolute;
+    top: -1rem;
+    font-size: 1.7rem;
+    z-index: 1;
+    left: 3.5rem;
+    background-color: white;
+    color: rgb(126, 124, 124);
+}
+
+.d1 td .i {
+    position: absolute;
+    font-size: 2rem;
+    top: 1rem;
+    left: 4rem;
+    color: blue;
+    /* color: rgba(121, 117, 117, 0.74); */
+    z-index: 1;
+}
+
+.b1,
+.b2 {
+    position: absolute;
+    width: 10rem;
+    height: 4rem;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.dgndr {
+    margin-left: 5rem;
+    font-size: 1.5rem;
+}
+
+.b1 {
+    background-color: blue;
+    top: 0;
+    left: 15rem;
+    color: white;
+}
+
+.i1 {
+    position: absolute;
+    left: 16rem;
+    font-size: 1.5rem;
+    top: 1.2rem;
+    color: white;
+    z-index: 1;
+}
+
+.b2 {
+    right: 16rem;
+    top: 0;
+    background-color: red;
+    color: white;
+}
+
+.i2 {
+    position: absolute;
+    right: 23.5rem;
+    font-size: 1.8rem;
+    top: 1.3rem;
+    color: rgb(255, 255, 255);
+    z-index: 1;
+
+}
+
+h4 {
+    color: blue;
+    font-size: 2.5rem;
+    text-align: center;
+    width: 100%;
+    /* border: 2px solid black; */
+}
+
+.span {
+    position: absolute;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    /* border: 2px solid red; */
+    text-align: justify;
+    letter-spacing: .1rem;
+    /* margin-left: 4rem; */
+    font-size: 1.5rem;
+}
+
+legend {
+    position: absolute;
+    top: 1rem;
+    color: blue;
+    font-size: 1.5rem;
+    left: 3rem;
+    font-weight: bold;
+
+}
+
+@media screen and (max-width:998px) {
+
+    
+
+    .dgndr {
+        margin-left: 0rem;
+    }
+
+    .label2 {
+        font-size: 1.2rem;
+        margin-left: 0rem;
+    }
+
+    .b1 {
+        left: 10rem;
+    }
+
+    .i1 {
+        left: 11rem;
+    }
+
+    .b2 {
+        right: 10rem;
+    }
+
+    .i2 {
+        right: 17.5rem;
+    }
+
+    .d1 td {
+        padding-left: 3rem;
+    }
+    .about{
+        top: 50.5%;
+    }
+}
+
+@media screen and (max-width:812px) {
+    .dgndr {
+        margin-left: 0;
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .side {
+        width: 70%;
+        margin: auto;
+        margin-bottom: 2rem;
+        height: 60rem;
+        
+    }
+
+    .d1 {
+        margin: auto;
+        width: 70%;
+        
+    }
+
+    .d1 td {
+        width: 100%;
+
+        display: block;
+    }
+
+    .d1 input[type=text],
+    input[type=date],
+    input[type=email] {
+        width: 88%;
+    }
+
+    .d1 select {
+        width: 88%;
+    }
+
+    .dgndr {
+        /* margin-left: 12rem; */
+        font-size: 1.5rem;
+        padding-top: 2rem;
+    }
+
+    #s1 {
+        display: none;
+    }
+    .about{
+        top: 49%;
+    }
+}
+
+@media screen and (max-width:600px) {
+
+    .side,
+    .d1 {
+        width: 95%;
+        left: 2.5%;
+    }
+    .label2{
+        font-size: .5rem;
+    }
+
+    /* .d1 td{
+        padding-left: 2.rem;
+    } */
+    #s1 {
+        display: none;
+    }
+}
+
+@media screen and (max-width:384px) {
+
+    .side,
+    .d1 {
+        width: 95%;
+        left: 2.5%;
+    }
+
+    .d1 td {
+        padding-left: 2rem;
+    }
+
+    .d1 td .i {
+        left: 2.5rem;
+    }
+
+    .label2 {
+        padding-left: 1.5rem;
+    }
+
+    .dgndr {
+        padding-top: 1.5rem;
+        font-size: 1.5rem;
+    }
+
+    .label2 {
+        margin-left: -3rem;
+        font-size: .5rem;
+    }
+
+    #s1 {
+        display: none;
+    }
+
+    .b1 {
+        left: 3rem;
+    }
+
+    .i1 {
+        left: 3.5rem;
+    }
+
+    .b2 {
+        right: 3.2rem;
+    }
+
+    .i2 {
+        right: 11rem;
+    }
+
+    .about {
+        top: 49%;
+    }
+}

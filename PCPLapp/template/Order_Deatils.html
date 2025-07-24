@@ -1,0 +1,415 @@
+{% extends aman.page_name %}
+{% block extralinks %}
+{% load static %}
+{% load tz %}
+{% now "Y" as current_year %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{% static 'css/p.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/complete-validation.js' %}"></script>
+{% endblock extralinks %}
+{% block content %}
+<section class="main-content">
+    
+    <section class="table-content">
+        <div class="for-btn"><h2>Order Details Form</h2>
+            <a href="{% url 'Order_Service' %}"><button class="add-new" ><i class="fa fa-plus"></i>&nbsp;Service</button></a><br></div>
+        
+        <h3>
+           
+            <div class="table-content-div search-section">
+                <form method="post">
+                    {% csrf_token %}
+                   
+                    <table>
+                        <tr>
+                            <td>
+                                <label style="display:block;">LR Number <font style="color:red;">*</font></label>
+                                <input type="text" value="{{ data.depotname.diop_id }}" style="width: 37.5%;" readonly>
+                                <input type="text" value="{{order_id}}" name="order_id" id="order_id"  class="order_id" placeholder="Auto Generate" readonly style="width: 60%;">
+                                
+                                
+                                <span></span>
+                            </td>
+                            <td>
+                                <label style="display:block;">LR Date<font style="color:red;">*</font></label>
+                                <input type="date" class="date" name="lr_date" id="lrdate" >
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Distributor Name<font style="color:red;">*</font></label>
+                                <select name="dist_name" id="dist_name">
+                                    
+                                    <option value="" selected disabled>----- Distributor Name -----</option>
+                                    {% for a in data.distri_name  %}
+                                    <option value="{{a.dist_name}}">{{a.dist_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="display: block;">Distributor Town<font style="color:red;">*</font></label>
+                                <input type="text"  name="dist_town" id="dist-town" style="text-transform: capitalize;" placeholder="Distributor Town" onclick="alphapets('#name')">
+                                <span></span>
+                            </td>
+                           
+                            <td>
+                                <label>Transporter Name<font style="color:red;">*</font></label>
+                                <select name="trans_name" id="trans_name">
+                                    <option value="" selected disabled>----- Transporter Name -----</option>
+                                    {% for a in data.transp_name  %}
+                                    <option value="{{a.trans_name}}">{{a.trans_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <label style="display: block;">Vehicle Type<font style="color:red;">*</font></label>
+                                <select name="v_type" id="v_type">
+                                    <option value="" selected disabled>----- Select Vehicle Type -----</option>
+                                    
+                                   
+                                </select>
+                            </td>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Vehicle No. <font style="color:red;">*</font></label>
+                                <input type="text" id="vnmbr" onclick="vehicle('#vnmbr')" 
+                                 name="v_no" style="text-transform: uppercase;"  placeholder="Vehicle No.">
+                                <span></span>
+                            </td>
+                            <td style="font-size: 1rem;">
+                                <label style="display: block;">Load Type<font style="color:red;">*</font></label>
+                                <div style="display:flex;justify-content:space-evenly;">
+                                    <div style="cursor: pointer;" class="radio"><input type="radio" name="l_type" value="FTL"  id="FTL" class="l_type"   /> FTL</div>
+                                    <div style="cursor: pointer;" class="radio"><input type="radio" name="l_type" value="PTL" id="PTL"  class="l_type" /> PTL</div>
+                                    <div style="cursor: pointer;" class="radio"><input type="radio" name="l_type" value="Weight" id="Weight"  class="l_type" /> Weight</div></div>
+                            </td>
+                            <td>
+                                <label>Invoice No.<font style="color:red;">*</font></label>
+                                <input type="text" name="invoice_no" id="invoicenmbr" onclick="invoice('#invoicenmbr')" placeholder="Invoice No">
+                                <span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <label>Invoice Value<font style="color:red;">*</font></label>
+                                <input type="text" name="invoice_val" id="invoiceval" onclick="price('#invoiceval')"  placeholder="Invoice Value">
+                                <span></span>
+                            </td>
+                            <td>
+                                <label >Quantity<font style="color:red;">*</font></label>
+                                <input class="major" type="text" name="quantity" id="quantity" onclick="price('#quantity')"  placeholder="Quantity">
+                                <select class="mini" name="quan" id="quan" required>
+                                    <option value="" selected disabled>Qty.</option>
+                                    <option  value="Box"  >Box</option>
+                                    <option  value="Cartoon"  >Cartoon</option>
+                                    <option  value="Bag"  >Bag</option>
+                                    <option  value="Drum"  >Drum</option>
+                                    <option  value="No."  >No.</option>
+                                </select>
+                                <span></span>
+                            </td>
+                            <td>
+                                <label style="display:block;">Invoice Date<font style="color:red;">*</font></label>
+                                <input type="Date" name="invoice_date" id="invoicedate" class="date">
+                                <span></span>
+                            </td>
+                           
+                        <tr>
+                            
+                           
+                        <tr>
+                            <td >
+                                <label>Weight<font style="color:red;">*</font></label>
+                                <input class="major" type="text" name="weight" id="weig"  placeholder="Weight">
+                                <select class="mini"  name="weig" id="unit" required>
+                                    <option value="" selected disabled>Unit</option>
+                                    <option  value="Kgs" >Kgs</option>
+                                    <option  value="MT"  >MT</option>
+                                    <option  value="Quintol"  >Quintol</option>
+                                </select>
+                                <span></span>
+                            </td>
+                            <td>
+                                <label style="display:block;">Labour Expense<font style="color:red;">*</font></label>
+                                <input type="text" name="labour_exp" id="labourexpense" placeholder="0" onclick="price('#labourexpense')">
+                                <span></span>
+                            </td>
+                            <td>
+                                <label style="display:block;">Freight<font style="color:red;">*</font></label>
+                                <input type="text" name="freight"id="freight" onclick="price('#Freight')" placeholder="0">
+                                <span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <label style="display:block;">Miscallaneous Charge<font style="color:red;">*</font></label>
+                                <input type="text" name="misc_charge" id="Miscallaneous" placeholder="0" onclick="price('#Miscallaneous')">
+                                <span></span>
+                            </td>
+                            <td>
+                                <label style="display:block;">Total Amount<font style="color:red;" >*</font></label>
+                                <input type="text" name="total_amt" id="totalamount" placeholder="Total Amount" readonly >
+                                <span></span>
+                            </td>
+                            <td>
+                                <label style="display:block;">Advance Amount<font style="color:red;">*</font></label>
+                                <input type="text"  placeholder="0" name="advance_amnt" id="advance" onclick="price('#advance')"  class='major' >
+                                <input type="text" value="" name="advance_per" id="percentage" class='mini' style="text-align:center;font-weight:bolder;" readonly>
+                                
+                                <span></span>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="display:block;">Dues Amount<font style="color:red;">*</font></label>
+                                <input type="text" readonly name="due_amnt" id="duesamount" placeholder="Dues Amount" onclick="number('duesamount')" >
+                                <span></span>
+                            </td>
+                            <td>
+                                <label>Product<font style="color:red;">*</font></label>
+                                <input type="text" name="product" id="product" placeholder="Product" onclick="alphapets('#product')">
+                                <span></span>
+                            </td>
+                           
+                           
+                           
+                        </tr>
+                        <tr>
+                            
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <input type="submit" class="entry-button" value="&#10003; Submit">
+                                <input type="reset" class="entry-button" style="background-color:#EA5453;margin-left:3rem;" value="↻ Refresh">
+                                <input type="button" class="entry-button" id="preserve" value=" Preserve Lr No." style="right:0rem;position: absolute;background-color:blue;">
+                            </td>
+                            <td>
+                                <!-- <label>LR Preserve No.<font style="color:red;">*</font></label> -->
+                                
+                                <select name="preserveid" id="preserveid">
+                                    
+                                    <option value="" selected disabled>----- Preserve LR Number -----</option>
+                                    {% for a in data.preservelr  %}
+                                    <option value="{{a.order_id}}">{{a.order_id}}</option>
+                                    {% endfor %}
+                                </select>
+                                <span></span>
+                            </td>
+                        </tr>
+                        <tr hidden>
+                            <td><input type="text" id="depotname" name="diponame"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </h3>
+    </section>
+    
+</section>
+
+<script>
+    $(document).ready(function(){
+        $('#dist_name').change(function (e) { 
+            if ($('#dist_name').val().trim() !== "") {
+                    let useridURL = `{% url "Order_Deatils" %}?dist_name=${$('#dist_name').val()}`;
+                        $.get(useridURL, function(response) {
+                            $('#dist-town').val(response.data);
+                            
+                            
+                        });
+                    }
+        });
+        
+        $('#trans_name').change(function (e) { 
+          if ($('#trans_name').val().trim() !== "") {
+              
+              let useridURL = `{% url "Order_Deatils" %}?trans_name=${$('#trans_name').val()}`;
+                      $.get(useridURL, function(response) {
+                          $('#v_type').html(response.data);
+                        });
+                    
+                  }
+        });
+
+        $('#preserveid').change(function(e) {
+            
+            if ($('#preserveid').val().trim() !== "") {
+                let useridURL = `{% url "Order_Deatils" %}?preserveid=${$('#preserveid').val()}`;
+                $.get(useridURL, function(response) {
+                    if (response.success) {
+                        $('#order_id').val(response.data);
+                        $('#dist-town').val(response.dist_town);
+                        $('#lrdate').val(response.lr_date);
+                        $('#dist_name').val(response.dist_name);
+                        $('#dist_name').siblings('label').css('display', 'block');
+                        $('#trans_name').val(response.trnas_name);
+                        $('#trans_name').siblings('label').css('display', 'block');
+                        $('#v_type').html(response.v_type);
+                        $('#v_type').siblings('label').css('display', 'block');
+                        $('#vnmbr').val(response.v_no).siblings('label').css('display', 'block');
+                        $('#invoicenmbr').val(response.invoice_no).siblings('label').css('display', 'block');
+                        $('#invoiceval').val(response.invoice_val).siblings('label').css('display', 'block');
+                        $('#quantity').val(response.quantity).siblings('label').css('display', 'block');
+                        $('#quan').val(response.quan).siblings('label').css('display', 'block');
+                        $('#invoicedate').val(response.invoice_date).siblings('label').css('display', 'block');
+                        $('#weig').val(response.weight).siblings('label').css('display', 'block');
+                        $('#unit').val(response.weig).siblings('label').css('display', 'block');
+                        $('#labourexpense').val(response.labour_exp).siblings('label').css('display', 'block');
+                        $('#freight').val(response.freight).siblings('label').css('display', 'block');
+                        $('#Miscallaneous').val(response.misc_charge).siblings('label').css('display', 'block');
+                        $('#totalamount').val(response.total_amt).siblings('label').css('display', 'block');
+                        $('#advance').val(response.advance_amnt).siblings('label').css('display', 'block');
+                        $('#duesamount').val(response.due_amnt).siblings('label').css('display', 'block');
+                        $('#product').val(response.product).siblings('label').css('display', 'block');
+                        if( response.l_type == 'FTL'){
+                            $('#FTL').prop('checked', true);
+                        }
+                        else if ( response.l_type == 'PTL') {
+                            $('#PTL').prop('checked', true);
+                        }
+                        else{
+                            $('#Weight').prop('checked', true);
+                        }
+                    } else {
+                        alert('Error: ' + response.error);
+                    }
+                }).fail(function() {
+                    alert('Error: Failed to fetch data from server');
+                });
+            }
+        });
+        
+
+        $('.l_type').click(function (e) {
+            if ($(this).val().trim() !== "") {
+                let l_type = $(this).val();
+                let dist_town = $('#dist-town').val();
+                let v_type = $('#v_type').val();
+                
+                let useridURL = "{% url 'Order_Deatils' %}?l_type=" + l_type + "&dist_town=" + dist_town + "&v_type=" + v_type;
+                
+                $.get(useridURL, function(response) {
+                    $('#freight').val(response.data);
+                });
+            }
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+{% if messages %}
+{% for msg in messages %}
+{% if msg.tags == 'success' %}
+<script>
+    Swal.fire({
+        icon: '{{msg.tags}}',
+        title: '{{msg}}',
+        showConfirmButton: true,
+        confirmButtonClass: 'btn btn-success'
+    });
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+<script>
+    $(document).ready(function () {
+        let value = sessionStorage.getItem('depot_Name')
+        $('#depotname').val(value);
+    });
+
+</script>
+<script>
+    const currentYear = new Date().getFullYear();
+    const currentYearLastTwoDigits = currentYear.toString().slice(-2); 
+    
+    $('.order_id').each(function() {
+        const originalValue = $(this).val();
+        const parts = originalValue.split('/');
+        if (parts.length === 2) {
+            const updatedValue = parts[0] + '/' + currentYearLastTwoDigits + '/' + parts[1];
+            $(this).val(updatedValue);
+        }
+    });
+
+
+    $(document).ready(function () {
+        $('#preserve').click(function (e) { 
+            $.ajax({
+                url: "{% url "preserve" %}",
+                type: "POST",
+                data: $('form').serialize(),
+                success: function (response) {
+                    if (response.success == true) {
+                        swal.fire({
+                            icon :'success',
+                            title: 'Preservation Successful !',
+                            text: 'LR No. Preserved For Future Use.',
+                            confirmButtonText: 'Ok',
+                            showCancelButton: false,
+                        }).then((res) => {
+                            if (res.isConfirmed) {
+                                window.location.reload()
+                            }
+                        });
+                    } 
+                }
+            });
+        });
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        function calculateTotals() {
+            var labourExpense = parseFloat($('#labourexpense').val()) || 0;
+            var freight = parseFloat($('#freight').val()) || 0;
+            var miscCharge = parseFloat($('#Miscallaneous').val()) || 0;
+
+            var totalAmount = labourExpense + freight + miscCharge;
+            $('#totalamount').val(totalAmount.toFixed(2));
+
+            if (totalAmount !== 0) {
+                var advanceAmount = parseFloat($('#advance').val()) || 0;
+                var advancePercent = (advanceAmount / totalAmount) * 100;
+                $('#percentage').val(advancePercent.toFixed(2) + '%');
+            } else {
+                $('#percentage').val('0%'); 
+            }
+
+            // Calculate dues amount and handle NaN case
+            var dueAmount = totalAmount - (parseFloat($('#advance').val()) || 0);
+            if (!isNaN(dueAmount) && isFinite(dueAmount)) {
+                $('#duesamount').val(dueAmount.toFixed(2));
+            } else {
+                $('#duesamount').val('');
+            }
+        }
+
+        $('#labourexpense, #freight, #Miscallaneous, #advance').on('input', function() {
+            calculateTotals();
+        });
+
+        function handleNumericInput(inputField) {
+            var value = $(inputField).val();
+            value = value.replace(/[^\d.-]/g, ''); 
+            $(inputField).val(value);
+        }
+
+        $('#labourexpense, #freight, #Miscallaneous, #advance, #duesamount').on('input', function() {
+            handleNumericInput(this);
+        });
+
+        calculateTotals();
+    });
+</script>
+
+
+{% endblock content %}

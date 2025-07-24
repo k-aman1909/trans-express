@@ -1,0 +1,261 @@
+{% extends aman.page_name %}
+{% block extralinks %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{% static 'css/p.css' %}">
+<!-- <link rel="stylesheet" href="p.css"> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{% static 'js/complete-validation.js' %}"></script>
+{% endblock extralinks %}
+{% block content %}
+<section class="main-content">
+    <h2></h2>
+    <section class="table-content">
+        <div class="for-btn">
+            <h2>Transporter Details Form</h2>
+            <a href="{% url 'transpoter_details' %}"> <button class="add-new"><i
+                        class="fa-solid fa-xmark"></i>&nbsp;Close</button></a><br>
+        </div>
+        <div class="table-content-div">
+            <form method="POST">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>
+                            <label>Transporter Id<font style="color:red;">*</font></label>
+                            <input type="text" name="trans_id" id="" placeholder="Transporter Id" readonly
+                                value="{{trans_id}}">
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>Transporter Name<font style="color:red;">*</font></label>
+                            <input type="text" name="trans_name" style="text-transform:capitalize;" id="name"
+                                onfocus="alphabets('#name')" 
+                                placeholder="Transporter Name" required>
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>Mobile No.</label>
+                            <input type="text"  name="mob_no" id="contact"
+                                placeholder="Mobile No." minlength="10" maxlength="10"
+                                onfocus="number('#contact')">
+                            <span></span>
+                        </td>
+                    </tr>
+                    <tr>
+
+
+                        <td>
+                            <label>Landline No.</label>
+                            <input type="text"  name="landline_no" id="landline" minlength="10" maxlength="10"
+                            onfocus="optional('#landline')" placeholder="Landline No.(Optional)">
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>Proprietor Name<font style="color:red;">*</font></label>
+                            <input type="text" style="text-transform:capitalize;" required name="pro_name"
+                                id="prop-name" onfocus="alphabets('#prop-name')" placeholder="Proprietor">
+                            <span></span>
+                        </td>
+                        <td>
+                            <label> State<font style="color:red;">*</font></label>
+                            <select name="state" id="myst" required>
+                                <option value="" selected disabled>----- Select Any State -----</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Chattisgarh">Chattisgarh</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="jammu & Kashmir">Jammu & Kashmir</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Lakshadweep">Lakshadweep</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                    <option value="Andaman & Nicobar">Andaman & Nicobar</option>
+                                    <option value="Dadra & Nagar Haveli and Daman & Diu">Dadra & Nagar Haveli and Daman
+                                        & Diu</option>
+                                    <option value="Pondicherry">Pondicherry</option>
+                                    <option value="Nagaland"> Nagaland</option>
+                            </select>
+                            <span></span>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <label> District<font style="color:red;">*</font></label>
+                            <select name="district" id="mydist" required disabled>
+                                <option value="" selected disabled>------Select Any District------</option>
+                                
+                            </select>
+                            <span></span>
+                        </td>
+                        <td colspan="2">
+                            <label style="top:.7rem; left:2.5rem">Address<font style="color:red;">*</font></label>
+                            <input type="text"id="loctn" name="add" required
+                                placeholder="flat/street/landmark">
+                            <span></span>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <label> Vehicle Type<font style="color:red;">*</font></label>
+                            <select name="veh_typ"  id="s_v_t" style="width: 50%;">
+                                <option value="" disabled selected> -- Select Vehicle Type -- </option>
+                                {% for a in aman.vehicle  %}
+                                    <option value="{{a.vtype}}">{{a.vtype}}</option>
+                                    {% endfor %}
+                            </select>
+                            <input type="text" name="vehicle_type" id="v_t"  required style="width: 48.7%;">
+
+                        </td>
+
+                        <td>
+                            <label>Bank Name</label>
+                            <input type="text" name="bank_name"  style="text-transform:capitalize;"
+                                id="bank-name" onfocus="bankdetail('#bank-name')"  placeholder="Bank Name">
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>Account Holder Name</label>
+                            <input type="text" name="ac_holder_name"  style="text-transform:capitalize;"
+                                id="holder-name" onfocus="bankdetail('#holder-name')" placeholder="Account Holder Name">
+                            <span></span>
+                        </td>
+
+                    <tr>
+                    <tr>
+                        <td>
+                            <label>Account Number</label>
+                            <input type="text" minlength="9" maxlength="18" name="account_no"  id="acoount-nmbr"
+                                onfocus="accountno('#acoount-nmbr')"  placeholder="Account Number">
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>Confirm Account Number</label>
+                            <input type="text" minlength="9" maxlength="18" name="conf_acc_no" 
+                                id="conf-acnt-nmbr" onfocus="c_accountno('#conf-acnt-nmbr')"
+                                placeholder="Confirm Account">
+                            <span></span>
+                        </td>
+                        <td>
+                            <label>IFSC Code</label>
+                            <input type="text" name="ifsc" id="ifsccode" minlength="11" maxlength="11"
+                                style="text-transform: uppercase;" onfocus="forifsc('#ifsccode')"
+                                required
+                                placeholder="IFSC Code">
+                            <span></span>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center">
+                            <input type="submit" class="entry-button" value="&#10003; Submit">
+                            <input type="reset" class="entry-button" style="background-color:#EA5453;margin-left:3rem;"
+                                value="↻ Refresh" onclick="window.location.reload()">
+                        </td>
+                    </tr>
+                    <tr hidden>
+                        <td><input type="text" id="depotname" name="depo_id"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </section>
+
+</section>
+{% if messages %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+{% for msg in messages %}
+{% if msg.tags == 'success' %}
+<script>
+    Swal.fire({
+        icon: '{{msg.tags}}',
+        title: '{{msg}}',
+        showConfirmButton: true,
+        confirmButtonClass: 'btn btn-success'
+    });
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+<script>
+    $(document).ready(function () {
+        let value = sessionStorage.getItem('depot_Name')
+        $('#depotname').val(value);
+    });
+    $(document).ready(function () {
+        
+        $('#s_v_t').change(function (e) {
+            let value = $(this).val();
+            $(this).find('option:selected').prop('disabled', true);
+            if ($('#v_t').val() == "") {
+                $('#v_t').val(value);
+            }
+            else {
+                let val = $('#v_t').val()
+                $('#v_t').val(val + ',' + value);
+            }
+        });
+    });
+</script>
+<script>
+    $('select[name="state"]').change(function () {
+        $.ajax({
+            method: 'GET',
+            url: "/fghevbn/ajaxcall/",
+            dataType: "json",
+            data: {
+                'cond':'state',
+                'uname': $(this).val(),
+            },
+            success: function (response) {
+                if (response == 'None') {
+                    sweetAlert("Warning!", 'There is no record of mode available for ' + uname + '', "warning");
+                }
+                else {
+                    $('select[name="district"]').html(response);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+    $(function () {
+        $('#myst').change(function(){ 
+            
+            if($(this).val() !== ""){
+                $('#mydist').prop('disabled', false); 
+            } else {
+                $('#mydist').prop('disabled', true);
+            }
+        });
+    });
+</script>
+{% endblock content %}
