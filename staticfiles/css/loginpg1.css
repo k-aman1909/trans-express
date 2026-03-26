@@ -1,0 +1,90 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    text-transform: capitalize;
+    font-size: 10px;
+    
+}
+.front-div{
+    border: 2px solid red;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+.front-div .inner-div{
+    border: 2px solid rgb(0, 8, 255);
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+.front-div .inner-div .leftdiv,
+.front-div .inner-div .rightdiv{
+    border: 2px solid blueviolet;
+    width: 45rem;
+    display: flex;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    height: 55rem;
+}
+.text-center{
+    /* text-align: center; */
+    color: rgba(30, 56, 135, 0.984);
+    font-size: 3.5rem;
+}
+.front-div .inner-div .leftdiv table, tr, td{
+    border: 2px solid red;
+    border-collapse: collapse;
+}
+
+.front-div .inner-div .leftdiv .login-form{
+    border: 2px solid red;
+    width: 80%;
+    
+    
+}
+.front-div .inner-div .leftdiv .login-form td{
+    height: 7rem;
+    border-bottom:2px solid rgb(52, 64, 190) ;
+    position: relative;
+}
+
+.front-div .inner-div .leftdiv .login-form td input[type='text'],
+.front-div .inner-div .leftdiv .login-form td input[type='password']{
+    width: 90%;
+    position: absolute;
+    height: 60%;
+    right: 0;
+    border: 2px solid yellow;
+    font-size: 1.8rem;
+    /* border: none; */
+    outline: none;
+    bottom: 0;
+}
+ .front-div .inner-div div .login-form td i{
+    position: absolute;
+    font-size: 2rem;
+    color: rgb(20, 36, 138);
+    left: 0;
+} 
+.front-div .inner-div div .login-form td button{
+    height: 5rem;
+    font-size: 1.5rem;
+    padding-left: 15%;
+    padding-right: 15%;
+    color: rgb(255, 255, 255);
+    border: none;
+    outline: none;
+    margin-top: 2rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    background-color: rgb(36, 60, 149);
+    &:hover{
+        background-color: rgb(76, 76, 190);
+    }
+}
